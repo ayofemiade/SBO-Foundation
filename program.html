@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs & Initiatives - SBO Foundation</title>
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #555555;
+            background-color: #FFFFFF;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2D7D32;
+        }
+
+        .foundation-text {
+            color: #2C2C2C;
+            font-weight: 300;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #2D7D32;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #B8860B;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: #2D7D32;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #F8F8F8 0%, #F4E4BC 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 125, 50, 0.05);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: bold;
+            color: #2D7D32;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            color: #B8860B;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #555555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Programs Overview */
+        .programs-overview {
+            padding: 5rem 0;
+            background: #FFFFFF;
+        }
+
+        .overview-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .overview-content h2 {
+            font-size: 2.5rem;
+            color: #2D7D32;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .overview-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #B8860B;
+        }
+
+        .overview-content p {
+            font-size: 1.1rem;
+            color: #555555;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #F4E4BC 0%, #F8F8F8 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(184, 134, 11, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2D7D32;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #B8860B;
+            font-weight: 600;
+        }
+
+        /* Programs Grid */
+        .programs-grid {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #F8F8F8 0%, #F4E4BC 100%);
+        }
+
+        .programs-grid h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2D7D32;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .programs-grid h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #B8860B;
+        }
+
+        .programs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid rgba(184, 134, 11, 0.1);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .program-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .program-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .program-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .program-tagline {
+            font-size: 1rem;
+            color: #F4E4BC;
+            font-style: italic;
+        }
+
+        .program-content {
+            padding: 2rem;
+        }
+
+        .program-description {
+            color: #555555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .program-features li {
+            padding: 0.5rem 0;
+            color: #555555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .program-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2D7D32;
+            font-weight: bold;
+        }
+
+        .program-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: #2D7D32;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4CAF50;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 125, 50, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #B8860B;
+            border: 2px solid #B8860B;
+        }
+
+        .btn-secondary:hover {
+            background: #B8860B;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Special Programs */
+        .special-programs {
+            padding: 5rem 0;
+            background: #FFFFFF;
+        }
+
+        .special-programs h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2D7D32;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .special-programs h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #B8860B;
+        }
+
+        .special-program-card {
+            background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .special-program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .special-program-card:hover::before {
+            opacity: 1;
+        }
+
+        .special-program-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .special-program-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .special-program-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #F4E4BC;
+        }
+
+        .special-program-btn {
+            background: #B8860B;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .special-program-btn:hover {
+            background: #CD853F;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(184, 134, 11, 0.3);
+        }
+
+        /* Get Involved Section */
+        .get-involved {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #F4E4BC 0%, #F8F8F8 100%);
+            text-align: center;
+        }
+
+        .get-involved h2 {
+            font-size: 2.5rem;
+            color: #2D7D32;
+            margin-bottom: 1.5rem;
+        }
+
+        .get-involved p {
+            font-size: 1.2rem;
+            color: #555555;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .involvement-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .involvement-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .involvement-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .involvement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2D7D32;
+        }
+
+        .involvement-title {
+            font-size: 1.5rem;
+            color: #2D7D32;
+            margin-bottom: 1rem;
+        }
+
+        .involvement-description {
+            color: #555555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2C2C2C;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: #2D7D32;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #F4E4BC;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #B8860B;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            padding: 0.5rem;
+            background: #2D7D32;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #4CAF50;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555555;
+            color: #F4E4BC;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2D7D32;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background: #4CAF50;
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(255, 255, 255, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .page-header {
+                padding: 100px 0 60px;
+            }
+
+            .programs-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .program-card {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .program-cta {
+                flex-direction: column;
+            }
+
+            .involvement-options {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-header {
+                padding: 90px 0 50px;
+            }
+
+            .programs-container {
+                gap: 1.5rem;
+            }
+
+            .program-header {
+                padding: 1.5rem;
+            }
+
+            .program-content {
+                padding: 1.5rem;
+            }
+
+            .special-program-card {
+                padding: 2rem;
+            }
+
+            .impact-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>SBO <span class="foundation-text">FOUNDATION</span></h1>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="legacy.html" class="nav-link">Legacy</a>
+                <a href="programs.html" class="nav-link active">Programs</a>
+                <a href="donate.html" class="nav-link">Donate</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">Programs & Initiatives</h1>
+                <p class="page-subtitle">Empowering communities through education, leadership, and service</p>
+                <p class="page-description">
+                    Our programs embody Pa SBO's vision of creating lasting positive change. From scholarship opportunities to leadership development, each initiative is designed to transform lives and strengthen communities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Overview -->
+    <section class="programs-overview">
+        <div class="container">
+            <div class="overview-content">
+                <h2 class="animate-on-scroll">Our Impact</h2>
+                <p class="animate-on-scroll">
+                    Through our comprehensive programs, we continue Pa SBO's legacy of service and leadership. Our initiatives focus on education, youth development, and community empowerment.
+                </p>
+                <p class="animate-on-scroll">
+                    Every program is designed to create sustainable change, reflecting the values of integrity, leadership, and service that defined Pa SBO's remarkable life.
+                </p>
+                
+                <div class="impact-stats">
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Scholarship Recipients</div>
+                    </div>
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Youth Leaders Trained</div>
+                    </div>
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Community Projects</div>
+                    </div>
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Lives Impacted</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Grid -->
+    <section class="programs-grid">
+        <div class="container">
+            <h2 class="animate-on-scroll">Our Core Programs</h2>
+            
+            <div class="programs-container">
+                <!-- Education & Scholarships -->
+                <div class="program-card animate-on-scroll">
+                    <div class="program-header">
+                        <div class="program-icon">🎓</div>
+                        <h3 class="program-title">Education & Scholarships</h3>
+                        <p class="program-tagline">Investing in tomorrow's leaders</p>
+                    </div>
+                    <div class="program-content">
+                        <p class="program-description">
+                            Our scholarship program provides financial support to deserving students who demonstrate academic excellence and leadership potential, ensuring that financial barriers don't limit educational opportunities.
+                        </p>
+                        <ul class="program-features">
+                            <li>Annual scholarship awards for secondary and tertiary education</li>
+                            <li>Mentorship programs pairing recipients with professionals</li>
+                            <li>Academic support and career guidance</li>
+                            <li>Leadership development workshops</li>
+                        </ul>
+                        <div class="program-cta">
+                            <a href="#apply" class="btn btn-primary">Apply Now</a>
+                            <a href="#learn-more" class="btn btn-secondary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Youth Leadership -->
+                <div class="program-card animate-on-scroll">
+                    <div class="program-header">
+                        <div class="program-icon">👥</div>
+                        <h3 class="program-title">Youth Leadership Development</h3>
+                        <p class="program-tagline">Building tomorrow's changemakers</p>
+                    </div>
+                    <div class="program-content">
+                        <p class="program-description">
+                            Our youth leadership program cultivates the next generation of community leaders through intensive training, practical experience, and mentorship opportunities.
+                        </p>
+                        <ul class="program-features">
+                            <li>Leadership skills workshops and seminars</li>
+                            <li>Community service project coordination</li>
+                            <li>Public speaking and communication training</li>
+                            <li>Networking opportunities with established leaders</li>
+                        </ul>
+                        <div class="program-cta">
+                            <a href="#join" class="btn btn-primary">Join Program</a>
+                            <a href="#details" class="btn btn-secondary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Development -->
+                <div class="program-card animate-on-scroll">
+                    <div class="program-header">
+                        <div class="program-icon">🏘️</div>
+                        <h3 class="program-title">Community Development</h3>
+                        <p class="program-tagline">Strengthening communities together</p>
+                    </div>
+                    <div class="program-content">
+                        <p class="program-description">
+                            We support community-driven projects that address local needs and create lasting positive change, from infrastructure improvements to social programs.
+                        </p>
+                        <ul class="program-features">
+                            <li>Community infrastructure projects</li>
+                            <li>Healthcare and wellness initiatives</li>
+                            <li>Environmental conservation programs</li>
+                            <li>Economic empowerment projects</li>
+                        </ul>
+                        <div class="program-cta">
+                            <a href="#propose" class="btn btn-primary">Propose Project</a>
+                            <a href="#projects" class="btn btn-secondary">View Projects</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentorship Program -->
+                <div class="program-card animate-on-scroll">
+                    <div class="program-header">
+                        <div class="program-icon">🤝</div>
+                        <h3 class="program-title">Mentorship Program</h3>
+                        <p class="program-tagline">Guiding paths to success</p>
+                    </div>
+                    <div class="program-content">
+                        <p class="program-description">
+                            Our mentorship program connects experienced professionals with young people, providing guidance, support, and opportunities for personal and professional growth.
+                        </p>
+                        <ul class="program-features">
+                            <li>One-on-one mentoring relationships</li>
+                            <li>Career guidance and professional development</li>
+                            <li>Skill-building workshops and seminars</li>
+                            <li>Industry networking opportunities</li>
+                        </ul>
+                        <div class="program-cta">
+                            <a href="#register" class="btn btn-primary">Register</a>
+                            <a href="#mentor" class="btn btn-secondary">Become Mentor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Programs -->
+    <section class="special-programs">
+        <div class="container">
+            <h2 class="animate-on-scroll">Special Initiatives</h2>
+            
+            <div class="special-program-card animate-on-scroll">
+                <div class="special-program-icon">🏆</div>
+                <h3 class="special-program-title">Pa SBO Leadership Awards</h3>
+                <p class="special-program-description">
+                    An annual recognition program celebrating outstanding young leaders who embody the values of service, integrity, and community impact that Pa SBO championed throughout his life.
+                </p>
+                <a href="#awards" class="special-program-btn">Nominate a Leader</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved -->
+    <section class="get-involved">
+        <div class="container">
+            <h2 class="animate-on-scroll">Get Involved</h2>
+            <p class="animate-on-scroll">
+                Join us in continuing Pa SBO's legacy of service and leadership. There are many ways to contribute to our mission and make a difference in your community.
+            </p>
+            
+            <div class="involvement-options">
+                <div class="involvement-card animate-on-scroll">
+                    <div class="involvement-icon">💰</div>
+                    <h3 class="involvement-title">Donate</h3>
+                    <p class="involvement-description">
+                        Support our programs with a financial contribution that directly impacts lives and communities.
+                    </p>
+                    <a href="donate.html" class="btn btn-primary">Donate Now</a>
+                </div>
+                
+                <div class="involvement-card animate-on-scroll">
+                    <div class="involvement-icon">🙋‍♂️</div>
+                    <h3 class="involvement-title">Volunteer</h3>
+                    <p class="involvement-description">
+                        Share your time and skills to help us deliver impactful programs and services.
+                    </p>
+                    <a href="#volunteer" class="btn btn-primary">Volunteer</a>
+                </div>
+                
+                <div class="involvement-card animate-on-scroll">
+                    <div class="involvement-icon">🤝</div>
+                    <h3 class="involvement-title">Partner</h3>
+                    <p class="involvement-description">Join us as a strategic partner to amplify our impact and reach more communities together.</p>
+                    <a href="#contact" class="btn btn-primary">Become a Partner</a>
+                </div>
+
+                <div class="involvement-card animate-on-scroll">
+                    <div class="involvement-icon">📢</div>
+                    <h3 class="involvement-title">Advocate</h3>
+                    <p class="involvement-description">Spread the word about our mission and help us reach more people who share our values.</p>
+                    <a href="#contact" class="btn btn-primary">Advocate for Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBO Foundation</h3>
+                    <p>Preserving Legacy, Empowering Generations</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="legacy.html">Legacy</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@sbofoundation.org</p>
+                    <p>Phone: +234 XXX XXX XXXX</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SBO Foundation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </button>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar background opacity on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        const animateCounter = (element, target, duration = 2000) => {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            const updateCounter = () => {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        };
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat h3');
+                    statNumbers.forEach(stat => {
+                        const text = stat.textContent;
+                        const number = parseInt(text.replace(/\D/g, ''));
+                        if (number) {
+                            stat.textContent = '0';
+                            setTimeout(() => {
+                                animateCounter(stat, number);
+                            }, 500);
+                        }
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const programStats = document.querySelector('.program-stats');
+        if (programStats) {
+            statsObserver.observe(programStats);
+        }
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

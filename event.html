@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - SBO Foundation</title>
+    <style>
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
+    color: #555555;
+    background-color: #FFFFFF;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2D7D32;
+}
+
+.foundation-text {
+    color: #2C2C2C;
+    font-weight: 300;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #555555;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #2D7D32;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #B8860B;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: #2D7D32;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Page Header */
+.page-header {
+    padding: 120px 0 60px;
+    background: linear-gradient(135deg, #F8F8F8 0%, #F4E4BC 100%);
+    text-align: center;
+    position: relative;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(45, 125, 50, 0.05);
+}
+
+.page-header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.page-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: #2D7D32;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.page-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: #B8860B;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.page-description {
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    color: #555555;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Events Section */
+.events-section {
+    padding: 5rem 0;
+    background: #FFFFFF;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2D7D32;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #B8860B;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.event-card {
+    background: #F8F8F8;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(184, 134, 11, 0.1);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.event-image {
+    height: 200px;
+    background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    position: relative;
+}
+
+.event-date-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2D7D32;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.event-content {
+    padding: 2rem;
+}
+
+.event-title {
+    font-size: 1.5rem;
+    color: #2D7D32;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.event-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #555555;
+    font-size: 0.95rem;
+}
+
+.event-detail-icon {
+    color: #B8860B;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.event-description {
+    color: #555555;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.event-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: #2D7D32;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #4CAF50;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(45, 125, 50, 0.3);
+}
+
+.btn-secondary {
+    background: #B8860B;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #CD853F;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(184, 134, 11, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #2D7D32;
+    border: 2px solid #2D7D32;
+}
+
+.btn-outline:hover {
+    background: #2D7D32;
+    color: white;
+}
+
+/* Event Status Badges */
+.event-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.status-upcoming {
+    background: #E8F5E8;
+    color: #2D7D32;
+}
+
+.status-registration {
+    background: #FFF3E0;
+    color: #B8860B;
+}
+
+.status-full {
+    background: #FFE6E6;
+    color: #D32F2F;
+}
+
+/* Past Events Section */
+.past-events {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #F4E4BC 0%, #F8F8F8 100%);
+}
+
+.past-events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.past-event-card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.past-event-card:hover {
+    transform: translateY(-3px);
+}
+
+.past-event-title {
+    color: #2D7D32;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.past-event-date {
+    color: #B8860B;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.past-event-summary {
+    color: #555555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Newsletter Section */
+.newsletter {
+    padding: 4rem 0;
+    background: #2D7D32;
+    color: white;
+    text-align: center;
+}
+
+.newsletter h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.newsletter p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #F4E4BC;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.newsletter-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(244, 228, 188, 0.3);
+}
+
+.newsletter-btn {
+    background: #B8860B;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-btn:hover {
+    background: #CD853F;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+    background: #2C2C2C;
+    color: white;
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: #2D7D32;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #F4E4BC;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #B8860B;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    padding: 0.5rem;
+    background: #2D7D32;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.social-link:hover {
+    background: #4CAF50;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #555555;
+    color: #F4E4BC;
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2D7D32;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: #4CAF50;
+    transform: translateY(-2px);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #FFFFFF;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #2D7D32;
+}
+
+.modal h2 {
+    color: #2D7D32;
+    margin-bottom: 1rem;
+}
+
+.modal p {
+    color: #555555;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.flyer-placeholder {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, #F4E4BC 0%, #F8F8F8 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #B8860B;
+    font-size: 3rem;
+    margin: 1rem 0;
+    border: 2px dashed #B8860B;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.98);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .page-header {
+        padding: 100px 0 40px;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .event-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .newsletter-input {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .newsletter-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-card {
+        margin: 0 10px;
+    }
+
+    .event-content {
+        padding: 1.5rem;
+    }
+
+    .past-events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Loading Animation */
+.loading {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.loading.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>SBO <span class="foundation-text">FOUNDATION</span></h1>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="legacy.html" class="nav-link">Legacy</a>
+                <a href="program.html" class="nav-link">Programs</a>
+                <a href="donate.html" class="nav-link">Donate</a>
+                <a href="event.html" class="nav-link active">Events</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">Events & Gatherings</h1>
+                <p class="page-subtitle">Join us in honoring Pa SBO's legacy through meaningful connections</p>
+                <p class="page-description">Discover upcoming events, memorial services, and community gatherings that celebrate the life and values of Simeon Babafemi Olaleye while building lasting relationships.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="events-section">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-grid">
+                <!-- Event 1 -->
+                <div class="event-card loading">
+                    <div class="event-image">
+                        <span>🎓</span>
+                        <div class="event-date-badge">
+                            <div>MAR</div>
+                            <div>15</div>
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-status status-upcoming">Upcoming</div>
+                        <h3 class="event-title">Annual Scholarship Awards Ceremony</h3>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <span class="event-detail-icon">📅</span>
+                                <span>March 15, 2025 | 10:00 AM</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-detail-icon">📍</span>
+                                <span>Lagos State University, Main Auditorium</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-detail-icon">👥</span>
+                                <span>250 attendees expected</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Join us as we celebrate academic excellence and honor outstanding students who embody Pa SBO's values of leadership and integrity. This year's ceremony will award scholarships to 15 deserving students.
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="openModal('rsvpModal')">RSVP Now</a>
+                            <a href="#" class="btn btn-outline" onclick="openModal('flyerModal')">View Flyer</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="event-card loading">
+                    <div class="event-image">
+                        <span>🌟</span>
+                        <div class="event-date-badge">
+                            <div>APR</div>
+                            <div>22</div>
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-status status-registration">Registration Open</div>
+                        <h3 class="event-title">Leadership Summit 2025</h3>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <span class="event-detail-icon">📅</span>
+                                <span>April 22, 2025 | 9:00 AM - 5:00 PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-detail-icon">📍</span>
+                                <span>Sheraton Hotel, Ikeja</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-detail-icon">💰</span>
+                                <span>₦5,000 per participant</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            A full-day leadership development program featuring keynote speakers, workshops, and networking opportunities. Designed for young professionals and community leaders.
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">Register</a>
+                            <a href="#" class="btn btn-secondary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="event-card loading">
+                    <div class="event-image">
+                        <span>🕊️</span>
+                        <div class="event-date-badge">
+                            <div>JUN</div>
+                            <div>18</div>
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-status status-upcoming">Save the Date</div>
+                        <h3 class="event-title">7th Annual Memorial Service</h3>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <span class="event-detail-icon">📅</span>
+                                <span>June 18, 2025 | 11:00 AM</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-detail-icon">📍</span>
+                                <span>Family Church, Ikeja</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-detail-icon">🎯</span>
+                                <span>Memorial & Thanksgiving</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Join family, friends, and the community in remembering Pa SBO's life and legacy. A time of reflection, gratitude, and recommitment to his values.
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="openModal('memorialModal')">More Details</a>
+                            <a href="#" class="btn btn-outline">Add to Calendar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="event-card loading">
+                    <div class="event-image">
+                        <span>🤝</span>
+                        <div class="event-date-badge">
+                            <div>AUG</div>
+                            <div>10</div>
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-status status-upcoming">Community Impact</div>
+                        <h3 class="event-title">Community Service Day</h3>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <span class="event-detail-icon">📅</span>
+                                <span>August 10, 2025 | 8:00 AM - 4:00 PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-detail-icon">📍</span>
+                                <span>Various locations across Lagos</span>
+                            </div>
+                            <div class="event-detail">
+                                <span class="event-detail-icon">🎯</span>
+                                <span>Community Outreach</span>
+                            </div>
+                        </div>
+                        <p class="event-description">
+                            Volunteers will participate in various community service activities including school renovations, healthcare outreach, and educational programs in underserved communities.
+                        </p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="openModal('volunteerModal')">Volunteer</a>
+                            <a href="#" class="btn btn-secondary">Sponsor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events Section -->
+    <section class="past-events">
+        <div class="container">
+            <h2 class="section-title">Past Events</h2>
+            <div class="past-events-grid">
+                <div class="past-event-card loading">
+                    <h3 class="past-event-title">2024 Annual Gala</h3>
+                    <p class="past-event-date">December 15, 2024</p>
+                    <p class="past-event-summary">A memorable evening celebrating 6 years of impact, raising ₦2.5 million for educational programs and honoring community leaders.</p>
+                </div>
+                <div class="past-event-card loading">
+                    <h3 class="past-event-title">Youth Leadership Workshop</h3>
+                    <p class="past-event-date">October 28, 2024</p>
+                    <p class="past-event-summary">50 young leaders participated in intensive training on ethical leadership, communication skills, and community engagement.</p>
+                </div>
+                <div class="past-event-card loading">
+                    <h3 class="past-event-title">Memorial Service 2024</h3>
+                    <p class="past-event-date">June 18, 2024</p>
+                    <p class="past-event-summary">Over 300 family members, friends, and community members gathered to honor Pa SBO's 6th remembrance anniversary.</p>
+                </div>
+                <div class="past-event-card loading">
+                    <h3 class="past-event-title">Scholarship Awards 2024</h3>
+                    <p class="past-event-date">March 20, 2024</p>
+                    <p class="past-event-summary">Awarded scholarships to 12 outstanding students, bringing our total scholarship recipients to over 75 since inception.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get notified about upcoming events, programs, and opportunities to make a difference</p>
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+        </section>
+
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBO Foundation</h3>
+                    <p>Preserving Legacy, Empowering Generations</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#legacy">Legacy</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#donate">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@sbofoundation.org</p>
+                    <p>Phone: +234 XXX XXX XXXX</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SBO Foundation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- RSVP Modal -->
+    <div id="rsvpModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('rsvpModal')">&times;</span>
+            <h2>RSVP for Scholarship Awards Ceremony</h2>
+            <p>Please fill out the form below to reserve your seat at our Annual Scholarship Awards Ceremony.</p>
+            <form onsubmit="handleRSVP(event)">
+                <div style="margin-bottom: 1rem;">
+                    <label for="name" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Full Name *</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Email Address *</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="phone" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="guests" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Number of Guests</label>
+                    <select id="guests" name="guests" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="0">Just me</option>
+                        <option value="1">1 guest</option>
+                        <option value="2">2 guests</option>
+                        <option value="3">3 guests</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="message" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Special Requirements</label>
+                    <textarea id="message" name="message" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" placeholder="Any special dietary requirements or accessibility needs?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit RSVP</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register for Leadership Summit 2025</h2>
+            <p>Secure your spot at this transformative leadership development event.</p>
+            <form onsubmit="handleRegistration(event)">
+                <div style="margin-bottom: 1rem;">
+                    <label for="reg-name" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Full Name *</label>
+                    <input type="text" id="reg-name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="reg-email" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Email Address *</label>
+                    <input type="email" id="reg-email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="reg-phone" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Phone Number *</label>
+                    <input type="tel" id="reg-phone" name="phone" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="organization" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Organization/Company</label>
+                    <input type="text" id="organization" name="organization" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="position" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Current Position</label>
+                    <input type="text" id="position" name="position" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="expectations" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">What do you hope to gain from this summit?</label>
+                    <textarea id="expectations" name="expectations" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                </div>
+                <div style="margin-bottom: 1.5rem; padding: 15px; background: #F4E4BC; border-radius: 8px;">
+                    <h4 style="color: #2D7D32; margin-bottom: 0.5rem;">Registration Fee: ₦5,000</h4>
+                    <p style="color: #555; font-size: 0.9rem;">Payment instructions will be sent via email after registration.</p>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Memorial Modal -->
+    <div id="memorialModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('memorialModal')">&times;</span>
+            <h2>7th Annual Memorial Service</h2>
+            <p>Join us in honoring the memory of Pa Simeon Babafemi Olaleye on June 18, 2025.</p>
+            <div style="margin: 2rem 0;">
+                <h3 style="color: #2D7D32; margin-bottom: 1rem;">Event Details</h3>
+                <div style="background: #F8F8F8; padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <p><strong>Date:</strong> Thursday, June 18, 2025</p>
+                    <p><strong>Time:</strong> 11:00 AM - 2:00 PM</p>
+                    <p><strong>Venue:</strong> Family Church, Ikeja, Lagos</p>
+                    <p><strong>Dress Code:</strong> Formal/Traditional attire</p>
+                </div>
+                <h3 style="color: #2D7D32; margin-bottom: 1rem;">Program Highlights</h3>
+                <ul style="margin-left: 1.5rem; color: #555;">
+                    <li>Opening prayers and hymns</li>
+                    <li>Tribute presentations by family and friends</li>
+                    <li>Keynote address on "Living a Legacy"</li>
+                    <li>Foundation impact report</li>
+                    <li>Thanksgiving service</li>
+                    <li>Light refreshments</li>
+                </ul>
+                <p style="margin-top: 1.5rem; color: #555;">This solemn yet celebratory event brings together all whose lives have been touched by Pa SBO's legacy of service, integrity, and compassion.</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button onclick="openModal('rsvpModal')" class="btn btn-primary">RSVP</button>
+                <button onclick="closeModal('memorialModal')" class="btn btn-outline">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Volunteer Modal -->
+    <div id="volunteerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('volunteerModal')">&times;</span>
+            <h2>Community Service Day - Volunteer Registration</h2>
+            <p>Be part of making a difference in our community on August 10, 2025.</p>
+            <form onsubmit="handleVolunteer(event)">
+                <div style="margin-bottom: 1rem;">
+                    <label for="vol-name" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Full Name *</label>
+                    <input type="text" id="vol-name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="vol-email" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Email Address *</label>
+                    <input type="email" id="vol-email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="vol-phone" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Phone Number *</label>
+                    <input type="tel" id="vol-phone" name="phone" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="activity" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Preferred Activity *</label>
+                    <select id="activity" name="activity" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="">Select an activity</option>
+                        <option value="school-renovation">School Renovation</option>
+                        <option value="healthcare-outreach">Healthcare Outreach</option>
+                        <option value="educational-program">Educational Programs</option>
+                        <option value="elderly-care">Elderly Care Visit</option>
+                        <option value="environmental-cleanup">Environmental Cleanup</option>
+                        <option value="any">Any activity needed</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="skills" style="display: block; margin-bottom: 0.5rem; color: #2D7D32; font-weight: bold;">Special Skills or Experience</label>
+                    <textarea id="skills" name="skills" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" placeholder="Any relevant skills, experience, or certifications?"></textarea>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" required>
+                        <span style="color: #555;">I understand this is a volunteer activity and I participate at my own responsibility.</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register as Volunteer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Flyer Modal -->
+    <div id="flyerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('flyerModal')">&times;</span>
+            <h2>Event Flyer</h2>
+            <div class="flyer-placeholder">
+                📄 Event Flyer
+            </div>
+            <p>Download or view the official event flyer for complete details and information.</p>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <button class="btn btn-primary">Download PDF</button>
+                <button onclick="closeModal('flyerModal')" class="btn btn-outline">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <script>
+        // Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Close nav menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Loading Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('loaded');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.loading').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form Handlers
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Simulate form submission
+            alert(`Thank you for subscribing! We'll keep you updated on upcoming events and programs at ${email}`);
+            event.target.reset();
+        }
+
+        function handleRSVP(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            
+            // Simulate form submission
+            alert(`Thank you ${name}! Your RSVP has been received. We'll send you a confirmation email shortly.`);
+            closeModal('rsvpModal');
+            event.target.reset();
+        }
+
+        function handleRegistration(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            
+            // Simulate form submission
+            alert(`Thank you ${name}! Your registration has been submitted. Payment instructions will be sent to your email.`);
+            closeModal('registerModal');
+            event.target.reset();
+        }
+
+        function handleVolunteer(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            
+            // Simulate form submission
+            alert(`Thank you ${name}! Your volunteer registration has been received. We'll contact you with more details soon.`);
+            closeModal('volunteerModal');
+            event.target.reset();
+        }
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some animation delays for cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.event-card, .past-event-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>

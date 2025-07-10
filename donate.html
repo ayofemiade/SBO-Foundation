@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - SBO Foundation</title>
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #555555;
+            background-color: #FFFFFF;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2D7D32;
+        }
+
+        .foundation-text {
+            color: #2C2C2C;
+            font-weight: 300;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #2D7D32;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #B8860B;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: #2D7D32;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 125, 50, 0.1);
+            z-index: 1;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .page-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: #F4E4BC;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        /* Why Donate Section */
+        .why-donate {
+            padding: 5rem 0;
+            background: #F8F8F8;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2D7D32;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #B8860B;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .impact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid rgba(184, 134, 11, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2D7D32, #B8860B);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .impact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2D7D32;
+        }
+
+        .impact-card h3 {
+            color: #2D7D32;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .impact-card p {
+            color: #555555;
+            line-height: 1.8;
+        }
+
+        /* Donation Options */
+        .donation-options {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .donation-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .donation-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .donation-card {
+            background: linear-gradient(135deg, #F8F8F8 0%, #F4E4BC 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 2px solid #B8860B;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(184, 134, 11, 0.2);
+        }
+
+        .donation-card.featured {
+            border-color: #2D7D32;
+            background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
+            color: white;
+        }
+
+        .donation-card.featured .donation-icon {
+            color: #F4E4BC;
+        }
+
+        .donation-card.featured h3 {
+            color: white;
+        }
+
+        .donation-card.featured p {
+            color: #F4E4BC;
+        }
+
+        .donation-icon {
+            font-size: 2.5rem;
+            color: #2D7D32;
+            margin-bottom: 1rem;
+        }
+
+        .donation-card h3 {
+            color: #2D7D32;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .donation-card p {
+            color: #555555;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .account-details {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid rgba(184, 134, 11, 0.3);
+        }
+
+        .featured .account-details {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(244, 228, 188, 0.3);
+        }
+
+        .account-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .account-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .account-label {
+            font-weight: 600;
+            color: #2D7D32;
+        }
+
+        .featured .account-label {
+            color: #F4E4BC;
+        }
+
+        .account-value {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #2C2C2C;
+        }
+
+        .featured .account-value {
+            color: white;
+        }
+
+        .copy-btn {
+            background: #B8860B;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .copy-btn:hover {
+            background: #CD853F;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #4CAF50;
+            transform: scale(0.95);
+        }
+
+        /* Quick Amount Buttons */
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .amount-btn {
+            background: white;
+            border: 2px solid #B8860B;
+            color: #B8860B;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .amount-btn:hover,
+        .amount-btn.active {
+            background: #B8860B;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Statistics Section */
+        .donation-stats {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #F4E4BC 0%, #F8F8F8 100%);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2D7D32;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #B8860B;
+            font-weight: 600;
+        }
+
+        /* Testimonial Section */
+        .testimonial {
+            padding: 4rem 0;
+            background: #2D7D32;
+            color: white;
+            text-align: center;
+        }
+
+        .testimonial-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .testimonial-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-size: 1.1rem;
+            color: #F4E4BC;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2C2C2C;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: #2D7D32;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #F4E4BC;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #B8860B;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            padding: 0.5rem;
+            background: #2D7D32;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #4CAF50;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555555;
+            color: #F4E4BC;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2D7D32;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background: #4CAF50;
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(255, 255, 255, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .donation-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-amounts {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-header {
+                padding: 100px 0 40px;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-amounts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>SBO <span class="foundation-text">FOUNDATION</span></h1>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="legacy.html" class="nav-link">Legacy</a>
+                <a href="program.html" class="nav-link">Programs</a>
+                <a href="donate.html" class="nav-link active">Donate</a>
+                <a href="event.html" class="nav-link">Events</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">Support Our Mission</h1>
+                <p class="page-subtitle">Your generosity helps us continue Pa SBO's legacy of leadership, integrity, and community impact for future generations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Donate Section -->
+    <section class="why-donate">
+        <div class="container">
+            <h2 class="section-title">Why Your Donation Matters</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">🎓</div>
+                    <h3>Education & Scholarships</h3>
+                    <p>Every donation helps fund educational opportunities for deserving students, ensuring that financial barriers don't prevent academic excellence and personal growth.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">👥</div>
+                    <h3>Youth Leadership</h3>
+                    <p>We invest in developing the next generation of leaders through mentorship programs, leadership training, and community service initiatives.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🏘️</div>
+                    <h3>Community Projects</h3>
+                    <p>Your support enables us to initiate and sustain community development projects that create lasting positive change in local neighborhoods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Options -->
+    <section class="donation-options">
+        <div class="container">
+            <div class="donation-content">
+                <h2 class="section-title">Choose Your Donation Method</h2>
+                <p>Select the most convenient way to contribute to our mission. Every amount, no matter the size, makes a meaningful difference.</p>
+                
+                <div class="donation-methods">
+                    <div class="donation-card featured">
+                        <div class="donation-icon">🏦</div>
+                        <h3>Bank Transfer</h3>
+                        <p>Direct bank transfer for secure and immediate contributions.</p>
+                        
+                        <div class="account-details">
+                            <div class="account-row">
+                                <span class="account-label">Bank:</span>
+                                <span class="account-value">First Bank Nigeria</span>
+                            </div>
+                            <div class="account-row">
+                                <span class="account-label">Account Name:</span>
+                                <span class="account-value">SBO Foundation</span>
+                            </div>
+                            <div class="account-row">
+                                <span class="account-label">Account Number:</span>
+                                <span class="account-value">2013456789</span>
+                            </div>
+                        </div>
+                        
+                        <button class="copy-btn" onclick="copyAccountDetails()">Copy Account Details</button>
+                    </div>
+
+                    <div class="donation-card">
+                        <div class="donation-icon">💳</div>
+                        <h3>Online Payment</h3>
+                        <p>Quick and secure online donations through our payment gateway.</p>
+                        
+                        <div class="quick-amounts">
+                            <button class="amount-btn" onclick="selectAmount(this, 5000)">₦5,000</button>
+                            <button class="amount-btn" onclick="selectAmount(this, 10000)">₦10,000</button>
+                            <button class="amount-btn" onclick="selectAmount(this, 25000)">₦25,000</button>
+                            <button class="amount-btn" onclick="selectAmount(this, 50000)">₦50,000</button>
+                        </div>
+                        
+                        <button class="copy-btn" onclick="showPaymentForm()">Proceed to Payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="donation-stats">
+        <div class="container">
+            <h2 class="section-title">Our Impact So Far</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Students Supported</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₦2.5M</div>
+                    <div class="stat-label">Funds Raised</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Community Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85+</div>
+                    <div class="stat-label">Donors</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial">
+        <div class="container">
+            <div class="testimonial-content">
+                <p class="testimonial-quote">"The SBO Foundation scholarship changed my life. I'm now able to pursue my dreams in engineering, and I'm committed to giving back to my community just as Pa SBO did."</p>
+                <p class="testimonial-author">- Adebayo Ogundimu, 2024 Scholarship Recipient</p>
+            </div>
+        </div>
+    </section>
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SBO Foundation</h3>
+                    <p>Preserving Legacy, Empowering Generations</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#legacy">Legacy</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#donate">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@sbofoundation.org</p>
+                    <p>Phone: +234 XXX XXX XXXX</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SBO Foundation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </button>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar background opacity on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Copy account details function
+        function copyAccountDetails() {
+            const accountInfo = `Bank: First Bank Nigeria
+Account Name: SBO Foundation
+Account Number: 2013456789`;
+            
+            navigator.clipboard.writeText(accountInfo).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = accountInfo;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Select amount function
+        function selectAmount(button, amount) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Store selected amount (could be used for payment processing)
+            window.selectedAmount = amount;
+        }
+
+        // Show payment form (placeholder)
+        function showPaymentForm() {
+            const amount = window.selectedAmount || 5000;
+            alert(`Payment gateway integration needed. Selected amount: ₦${amount.toLocaleString()}`);
+            // Here you would integrate with actual payment gateway like Paystack, Flutterwave, etc.
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.impact-card, .donation-card, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+            });
+
+        // Counter animation for statistics
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Animate counters when they come into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target.querySelector('.stat-number');
+                    const numberText = statNumber.textContent;
+                    let targetNumber;
+                    
+                    if (numberText.includes('₦')) {
+                        targetNumber = parseFloat(numberText.replace('₦', '').replace('M', '')) * 1000000;
+                        animateCounter(statNumber, targetNumber, 2000);
+                        // Format back to millions
+                        setTimeout(() => {
+                            statNumber.textContent = '₦' + (targetNumber / 1000000).toFixed(1) + 'M';
+                        }, 2100);
+                    } else {
+                        targetNumber = parseInt(numberText.replace('+', ''));
+                        animateCounter(statNumber, targetNumber, 2000);
+                        // Add plus sign back if it was there
+                        if (numberText.includes('+')) {
+                            setTimeout(() => {
+                                statNumber.textContent = targetNumber.toLocaleString() + '+';
+                            }, 2100);
+                        }
+                    }
+                    
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe stat cards for counter animation
+        document.querySelectorAll('.stat-card').forEach(card => {
+            statsObserver.observe(card);
+        });
+
+        // Form validation for custom donation amounts
+        function validateDonationAmount(amount) {
+            const numAmount = parseFloat(amount);
+            if (isNaN(numAmount) || numAmount <= 0) {
+                return { valid: false, message: 'Please enter a valid amount greater than 0' };
+            }
+            if (numAmount < 500) {
+                return { valid: false, message: 'Minimum donation amount is ₦500' };
+            }
+            return { valid: true, message: '' };
+        }
+
+        // Enhanced payment form functionality
+        function showPaymentForm() {
+            const amount = window.selectedAmount || 5000;
+            const validation = validateDonationAmount(amount);
+            
+            if (!validation.valid) {
+                alert(validation.message);
+                return;
+            }
+
+            // Create a modal for payment options
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+            `;
+
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 15px;
+                max-width: 500px;
+                width: 90%;
+                text-align: center;
+                position: relative;
+            `;
+
+            modalContent.innerHTML = `
+                <button onclick="this.parentElement.parentElement.remove()" style="
+                    position: absolute;
+                    top: 10px;
+                    right: 15px;
+                    background: none;
+                    border: none;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    color: #999;
+                ">×</button>
+                
+                <h3 style="color: #2D7D32; margin-bottom: 1rem;">Complete Your Donation</h3>
+                <p style="margin-bottom: 1.5rem; color: #555;">Amount: <strong>₦${amount.toLocaleString()}</strong></p>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <p style="color: #666; margin-bottom: 1rem;">Choose your preferred payment method:</p>
+                    <div style="display: grid; gap: 1rem;">
+                        <button onclick="processPayment('paystack', ${amount})" style="
+                            background: #2D7D32;
+                            color: white;
+                            border: none;
+                            padding: 1rem;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-size: 1rem;
+                            transition: background 0.3s ease;
+                        " onmouseover="this.style.background='#4CAF50'" onmouseout="this.style.background='#2D7D32'">
+                            Pay with Paystack
+                        </button>
+                        <button onclick="processPayment('flutterwave', ${amount})" style="
+                            background: #B8860B;
+                            color: white;
+                            border: none;
+                            padding: 1rem;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            font-size: 1rem;
+                            transition: background 0.3s ease;
+                        " onmouseover="this.style.background='#CD853F'" onmouseout="this.style.background='#B8860B'">
+                            Pay with Flutterwave
+                        </button>
+                    </div>
+                </div>
+                
+                <p style="font-size: 0.9rem; color: #999; margin-top: 1rem;">
+                    Your payment is secured with bank-level encryption
+                </p>
+            `;
+
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        // Payment processing function (placeholder for actual integration)
+        function processPayment(gateway, amount) {
+            // Close the modal
+            document.querySelector('[style*="position: fixed"]').remove();
+            
+            // Show loading state
+            const loadingModal = document.createElement('div');
+            loadingModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+            `;
+
+            loadingModal.innerHTML = `
+                <div style="
+                    background: white;
+                    padding: 2rem;
+                    border-radius: 15px;
+                    text-align: center;
+                    max-width: 400px;
+                    width: 90%;
+                ">
+                    <div style="
+                        border: 4px solid #f3f3f3;
+                        border-top: 4px solid #2D7D32;
+                        border-radius: 50%;
+                        width: 40px;
+                        height: 40px;
+                        animation: spin 1s linear infinite;
+                        margin: 0 auto 1rem;
+                    "></div>
+                    <p style="color: #2D7D32; font-weight: 600;">Processing your payment...</p>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">Please wait while we redirect you to ${gateway}</p>
+                </div>
+            `;
+
+            // Add spinner animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            document.body.appendChild(loadingModal);
+
+            // Simulate payment processing
+            setTimeout(() => {
+                loadingModal.remove();
+                showPaymentSuccess(amount);
+                
+                // Here you would integrate with actual payment gateways:
+                // For Paystack: https://paystack.com/docs/
+                // For Flutterwave: https://developer.flutterwave.com/
+                console.log(`Payment initiated: ${gateway} - ₦${amount.toLocaleString()}`);
+            }, 3000);
+        }
+
+        // Success message function
+        function showPaymentSuccess(amount) {
+            const successModal = document.createElement('div');
+            successModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+            `;
+
+            successModal.innerHTML = `
+                <div style="
+                    background: white;
+                    padding: 2rem;
+                    border-radius: 15px;
+                    text-align: center;
+                    max-width: 500px;
+                    width: 90%;
+                ">
+                    <div style="
+                        background: #4CAF50;
+                        border-radius: 50%;
+                        width: 80px;
+                        height: 80px;
+                        margin: 0 auto 1rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 2rem;
+                        color: white;
+                    ">✓</div>
+                    <h3 style="color: #2D7D32; margin-bottom: 1rem;">Thank You for Your Donation!</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">
+                        Your generous donation of <strong>₦${amount.toLocaleString()}</strong> will make a real difference in our community.
+                    </p>
+                    <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                        A receipt has been sent to your email address. You will receive updates on how your donation is being used.
+                    </p>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        background: #2D7D32;
+                        color: white;
+                        border: none;
+                        padding: 1rem 2rem;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 1rem;
+                    ">Close</button>
+                </div>
+            `;
+
+            document.body.appendChild(successModal);
+
+            // Auto-close after 10 seconds
+            setTimeout(() => {
+                if (document.body.contains(successModal)) {
+                    successModal.remove();
+                }
+            }, 10000);
+        }
+
+        // Custom amount input functionality
+        function createCustomAmountInput() {
+            const customButton = document.createElement('button');
+            customButton.className = 'amount-btn';
+            customButton.innerHTML = 'Custom';
+            customButton.onclick = function() {
+                const amount = prompt('Enter your donation amount (₦):');
+                if (amount) {
+                    const validation = validateDonationAmount(amount);
+                    if (validation.valid) {
+                        // Remove active class from all buttons
+                        document.querySelectorAll('.amount-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        
+                        // Update this button to show the custom amount
+                        this.innerHTML = `₦${parseFloat(amount).toLocaleString()}`;
+                        this.classList.add('active');
+                        window.selectedAmount = parseFloat(amount);
+                    } else {
+                        alert(validation.message);
+                    }
+                }
+            };
+            
+            // Add the custom button to quick amounts
+            const quickAmounts = document.querySelector('.quick-amounts');
+            if (quickAmounts) {
+                quickAmounts.appendChild(customButton);
+            }
+        }
+
+        // Initialize custom amount input
+        createCustomAmountInput();
+
+        // Donation progress tracker
+        function updateDonationProgress() {
+            const progressData = {
+                target: 5000000, // ₦5M target
+                current: 2500000, // ₦2.5M current (from the stats)
+                donors: 85
+            };
+
+            const progressElement = document.createElement('div');
+            progressElement.style.cssText = `
+                background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 15px;
+                margin: 2rem 0;
+                text-align: center;
+            `;
+
+            const progressPercentage = (progressData.current / progressData.target) * 100;
+            
+            progressElement.innerHTML = `
+                <h3 style="margin-bottom: 1rem;">Our Progress</h3>
+                <div style="
+                    background: rgba(255, 255, 255, 0.2);
+                    border-radius: 10px;
+                    overflow: hidden;
+                    margin: 1rem 0;
+                ">
+                    <div style="
+                        background: #F4E4BC;
+                        height: 20px;
+                        width: ${progressPercentage}%;
+                        transition: width 2s ease;
+                    "></div>
+                </div>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>₦${progressData.current.toLocaleString()}</strong> raised of ₦${progressData.target.toLocaleString()} goal
+                </p>
+                <p style="color: #F4E4BC; font-size: 0.9rem;">
+                    ${progressData.donors} generous donors have contributed so far
+                </p>
+            `;
+
+            // Insert progress tracker after the donation content
+            const donationContent = document.querySelector('.donation-content');
+            if (donationContent) {
+                donationContent.appendChild(progressElement);
+            }
+        }
+
+        // Initialize donation progress
+        updateDonationProgress();
+
+        // Testimonial slider functionality
+        function initializeTestimonialSlider() {
+            const testimonials = [
+                {
+                    quote: "The SBO Foundation scholarship changed my life. I'm now able to pursue my dreams in engineering, and I'm committed to giving back to my community just as Pa SBO did.",
+                    author: "Adebayo Ogundimu, 2024 Scholarship Recipient"
+                },
+                {
+                    quote: "Through the leadership program, I learned valuable skills that helped me start my own community initiative. Pa SBO's legacy lives on through these programs.",
+                    author: "Fatima Abdullahi, Youth Leader"
+                },
+                {
+                    quote: "The foundation's community projects have transformed our neighborhood. Clean water access and better education facilities have made a real difference.",
+                    author: "Chief Michael Okafor, Community Elder"
+                }
+            ];
+
+            let currentTestimonial = 0;
+            const testimonialQuote = document.querySelector('.testimonial-quote');
+            const testimonialAuthor = document.querySelector('.testimonial-author');
+
+            function showTestimonial(index) {
+                if (testimonialQuote && testimonialAuthor) {
+                    testimonialQuote.style.opacity = '0';
+                    testimonialAuthor.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        testimonialQuote.textContent = `"${testimonials[index].quote}"`;
+                        testimonialAuthor.textContent = `- ${testimonials[index].author}`;
+                        testimonialQuote.style.opacity = '1';
+                        testimonialAuthor.style.opacity = '1';
+                    }, 300);
+                }
+            }
+
+            // Auto-rotate testimonials
+            setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+        }
+
+        // Initialize testimonial slider
+        initializeTestimonialSlider();
+
+        // Newsletter signup functionality
+        function addNewsletterSignup() {
+            const footerContent = document.querySelector('.footer-content');
+            if (footerContent) {
+                const newsletterSection = document.createElement('div');
+                newsletterSection.className = 'footer-section';
+                newsletterSection.innerHTML = `
+                    <h4>Stay Updated</h4>
+                    <p style="margin-bottom: 1rem; color: #F4E4BC;">Get updates on our impact and upcoming events</p>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="email" placeholder="Your email" style="
+                            flex: 1;
+                            padding: 0.5rem;
+                            border: 1px solid #555;
+                            border-radius: 5px;
+                            background: #444;
+                            color: white;
+                        ">
+                        <button onclick="subscribeNewsletter()" style="
+                            background: #2D7D32;
+                            color: white;
+                            border: none;
+                            padding: 0.5rem 1rem;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            white-space: nowrap;
+                        ">Subscribe</button>
+                    </div>
+                `;
+                footerContent.appendChild(newsletterSection);
+            }
+        }
+
+        // Newsletter subscription function
+        function subscribeNewsletter() {
+            const emailInput = document.querySelector('input[type="email"]');
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                alert('Please enter your email address');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Simulate subscription process
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Subscribing...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert('Thank you for subscribing! You will receive updates about our impact and events.');
+                emailInput.value = '';
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 1500);
+        }
+
+        // Email validation helper
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Initialize newsletter signup
+        addNewsletterSignup();
+
+        // Keyboard navigation for accessibility
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Close any open modals
+                const modals = document.querySelectorAll('[style*="position: fixed"]');
+                modals.forEach(modal => modal.remove());
+            }
+        });
+
+        // Page load completion
+        window.addEventListener('load', () => {
+            // Add loaded class to body for any additional animations
+            document.body.classList.add('loaded');
+            
+            // Log successful page load
+            console.log('SBO Foundation Donation Page loaded successfully');
+        });
+    </script>
+</body>
+</html>
