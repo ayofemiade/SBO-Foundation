@@ -55,6 +55,12 @@ body {
     font-weight: 300;
 }
 
+.logo-image {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
 .nav-menu {
     display: flex;
     gap: 2rem;
@@ -197,10 +203,20 @@ body {
     animation: fadeInRight 1s ease 0.7s forwards;
 }
 
+.story-portrait {
+    width: 100%;
+    max-width: 400px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 3px solid #B8860B;
+}
+
 .story-image-placeholder {
     width: 100%;
     max-width: 400px;
-    height: 300px;
+    height: 500px;
     background: linear-gradient(135deg, #F4E4BC 0%, #F8F8F8 100%);
     border-radius: 15px;
     display: flex;
@@ -385,13 +401,21 @@ body {
 }
 
 .trustee-photo {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin: 0 auto 1.5rem;
     background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
     display: flex;
     align-items: center;
+    overflow: hidden;
+}
+
+.trustee-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
     justify-content: center;
     font-size: 3rem;
     color: white;

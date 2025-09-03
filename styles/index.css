@@ -55,6 +55,12 @@ body {
     font-weight: 300;
 }
 
+.logo-image {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
 .nav-menu {
     display: flex;
     gap: 2rem;
@@ -223,32 +229,21 @@ body {
     animation: fadeInRight 1s ease 0.3s forwards;
 }
 
-.image-placeholder {
-    width: min(300px, 80vw);
-    height: min(400px, 60vh);
-    max-width: 350px;
-    max-height: 450px;
-    background: rgba(255, 255, 255, 0.8);
+.hero-portrait {
+    width: min(400px, 75vw);
+    height: min(650px, 70vh);
+    max-width: 500px;
+    max-height: 750px;
+    object-fit: cover;
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border: 3px solid #B8860B;
 }
 
-.image-icon {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 1rem;
-    color: #B8860B;
-}
 
-.image-placeholder p {
-    color: #555555;
-    font-style: italic;
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
-}
+
+
+
 
 /* Values Section */
 .values {
@@ -532,6 +527,13 @@ body {
         gap: 3rem;
     }
     
+    .hero-portrait {
+        width: min(350px, 75vw);
+        height: min(600px, 65vh);
+        max-width: 400px;
+        max-height: 500px;
+    }
+    
     .image-placeholder {
         width: min(280px, 75vw);
         height: min(350px, 55vh);
@@ -602,6 +604,13 @@ body {
         padding: 10px 24px;
     }
 
+    .hero-portrait {
+        width: min(480px, 70vw);
+        height: min(550px, 65vh);
+        max-width: 350px;
+        max-height: 450px;
+    }
+    
     .image-placeholder {
         width: min(250px, 70vw);
         height: min(300px, 45vh);
@@ -659,6 +668,13 @@ body {
         min-width: unset;
     }
     
+    .hero-portrait {
+        width: min(400px, 65vw);
+        height: min(550px, 70vh);
+        max-width: 450px;
+        max-height: 580px;
+    }
+    
     .image-placeholder {
         width: min(220px, 65vw);
         height: min(280px, 40vh);
@@ -689,6 +705,13 @@ body {
         font-size: 0.9rem;
     }
 
+    .hero-portrait {
+      width: min(430px, 70vw);
+        height: min(500px, 70vh);
+        max-width: 450px;
+        max-height: 580px;
+    }
+    
     .image-placeholder {
         width: min(200px, 60vw);
         height: min(250px, 35vh);
@@ -721,6 +744,13 @@ body {
     .hero-content {
         gap: 1.2rem;
         padding: 0 8px;
+    }
+    
+    .hero-portrait {
+        width: min(350px, 75vw);
+        height: min(450px, 62vh);
+        max-width: 390px;
+        max-height: 490px;
     }
     
     .image-placeholder {
@@ -758,6 +788,13 @@ body {
         order: unset;
     }
     
+    .hero-portrait {
+        width: min(220px, 35vw);
+        height: min(280px, 70vh);
+        max-width: 280px;
+        max-height: 350px;
+    }
+    
     .image-placeholder {
         width: min(200px, 35vw);
         height: min(250px, 70vh);
@@ -769,6 +806,13 @@ body {
     .hero-content {
         max-width: 1400px;
         gap: 5rem;
+    }
+    
+    .hero-portrait {
+        width: 600px;
+        height: 750px;
+        max-width: 600px;
+        max-height: 750px;
     }
     
     .image-placeholder {
