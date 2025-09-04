@@ -397,68 +397,72 @@ body {
     background: #B8860B;
 }
 
-.special-program-card {
-    background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
-    color: white;
-    padding: 3rem;
-    border-radius: 20px;
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
     text-align: center;
-    margin-bottom: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(184, 134, 11, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
-.special-program-card::before {
+.project-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(45, 125, 50, 0.05) 0%, rgba(184, 134, 11, 0.05) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.special-program-card:hover::before {
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.project-card:hover::before {
     opacity: 1;
 }
 
-.special-program-icon {
-    font-size: 4rem;
-    margin-bottom: 1.5rem;
-}
-
-.special-program-title {
-    font-size: 2.2rem;
-    font-weight: bold;
+.project-icon {
+    font-size: 3rem;
     margin-bottom: 1rem;
+    display: block;
 }
 
-.special-program-description {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    color: #F4E4BC;
+.project-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2D7D32;
+    margin-bottom: 0.5rem;
 }
 
-.special-program-btn {
-    background: #B8860B;
-    color: white;
-    padding: 15px 40px;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
+.project-location {
+    font-size: 1rem;
+    color: #B8860B;
     font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    font-style: italic;
 }
 
-.special-program-btn:hover {
-    background: #CD853F;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(184, 134, 11, 0.3);
+.project-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 0;
 }
 
 /* Get Involved Section */
@@ -577,6 +581,17 @@ body {
     padding-top: 2rem;
     border-top: 1px solid #555555;
     color: #F4E4BC;
+}
+
+.footer-bottom a {
+    color: #B8860B;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
 }
 
 /* Scroll to Top Button */

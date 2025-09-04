@@ -566,6 +566,17 @@ body {
     color: #F4E4BC;
 }
 
+.footer-bottom a {
+    color: #B8860B;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
 /* Scroll to Top Button */
 .scroll-to-top {
     position: fixed;
