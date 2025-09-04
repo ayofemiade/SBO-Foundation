@@ -549,16 +549,41 @@ body {
 
     .contact-container {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2rem;
     }
 
     .contact-info,
     .contact-form {
         padding: 2rem;
+        margin: 0 10px;
+    }
+
+    .contact-info h3,
+    .form-title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .contact-item {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(184, 134, 11, 0.1);
+        border-radius: 12px;
+    }
+
+    .contact-details h4 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .contact-details p {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
     }
 
     .form-row {
         grid-template-columns: 1fr;
+        gap: 0;
     }
 
     .newsletter-form {
@@ -573,24 +598,93 @@ body {
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 15px;
+        padding: 0 10px;
     }
 
     .page-header {
-        padding: 90px 0 50px;
+        padding: 90px 0 40px;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+    }
+
+    .contact-container {
+        gap: 1.5rem;
     }
 
     .contact-info,
     .contact-form {
         padding: 1.5rem;
+        margin: 0 5px;
+        border-radius: 12px;
+    }
+
+    .contact-info h3,
+    .form-title {
+        font-size: 1.3rem;
     }
 
     .contact-item {
         flex-direction: column;
         text-align: center;
+        padding: 1rem;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin: 0 auto 0.5rem;
+    }
+
+    .contact-details {
+        text-align: center;
+        width: 100%;
+    }
+
+    .contact-details h4 {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .contact-details p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        padding: 12px;
+        font-size: 1rem;
     }
 
     .social-links {
         justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-link {
+        font-size: 1.2rem;
+        padding: 8px;
     }
 }
