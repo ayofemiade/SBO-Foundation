@@ -40,6 +40,33 @@ window.addEventListener('load', () => {
     });
 });
 
+// Add to Calendar functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const calendarButtons = document.querySelectorAll('.add-to-calendar');
+    
+    calendarButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const title = button.getAttribute('data-title');
+            const startDate = button.getAttribute('data-start');
+            const endDate = button.getAttribute('data-end');
+            const location = button.getAttribute('data-location');
+            const description = button.getAttribute('data-description');
+            
+            // Format dates for calendar
+            const start = new Date(startDate).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            const end = new Date(endDate).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            
+            // Create Google Calendar URL
+            const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&location=${encodeURIComponent(location)}&details=${encodeURIComponent(description)}`;
+            
+            // Open Google Calendar in new tab
+             window.open(googleCalendarUrl, '_blank');
+         });
+     });
+ });
+
 // Modal Handling
 const modals = document.querySelectorAll('.modal');
 const modalTriggers = document.querySelectorAll('[data-modal]');
