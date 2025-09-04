@@ -111,9 +111,9 @@ body {
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
+    background: url('../image/charity5.jpeg') center/cover no-repeat;
     color: white;
-    padding: 120px 0 60px;
+    padding: 150px 0 100px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -126,7 +126,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(45, 125, 50, 0.1);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 1;
 }
 
@@ -625,7 +625,7 @@ body {
     }
 
     .page-header {
-        padding: 100px 0 40px;
+        padding: 120px 0 60px;
     }
 
     .impact-grid {
