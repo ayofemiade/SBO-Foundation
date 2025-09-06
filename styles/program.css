@@ -750,6 +750,202 @@ body {
     margin: 0;
 }
 
+/* Leadership Skills Framework Styles */
+.skills-framework {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.skills-framework h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2D7D32;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.section-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skill-category {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(45, 125, 50, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2D7D32, #4CAF50, #B8860B);
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.skill-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #2D7D32, #4CAF50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.skill-category h3 {
+    font-size: 1.5rem;
+    color: #2D7D32;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.skill-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skill-category li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(184, 134, 11, 0.1);
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.skill-category li:last-child {
+    border-bottom: none;
+}
+
+.skill-category li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #B8860B;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.skill-category li:hover {
+    color: #2D7D32;
+    padding-left: 2rem;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced Get Involved Buttons */
+.get-involved .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 160px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.get-involved .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.get-involved .btn:hover::before {
+    left: 100%;
+}
+
+.get-involved .btn-outline {
+    background: linear-gradient(135deg, #2D7D32, #4CAF50);
+    color: white;
+    border: 2px solid #2D7D32;
+}
+
+.get-involved .btn-outline:hover {
+    background: linear-gradient(135deg, #1B5E20, #2D7D32);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(45, 125, 50, 0.3);
+    border-color: #1B5E20;
+}
+
+.get-involved .btn-outline:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(45, 125, 50, 0.2);
+}
+
+.involvement-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.involvement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.involvement-card .involvement-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.involvement-card h3 {
+    color: #2D7D32;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.involvement-card p {
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {
@@ -847,6 +1043,60 @@ body {
 
     .detail-card h4 {
         font-size: 1.1rem;
+    }
+
+    /* Leadership Skills Framework Mobile Styles */
+    .skills-framework h2 {
+        font-size: 2rem;
+    }
+
+    .section-intro {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .skill-category {
+        padding: 2rem 1.5rem;
+    }
+
+    .skill-icon {
+        font-size: 2.5rem;
+    }
+
+    .skill-category h3 {
+        font-size: 1.3rem;
+    }
+
+    .skill-category li {
+        font-size: 0.95rem;
+        padding: 0.6rem 0;
+    }
+
+    /* Mobile styles for enhanced get involved buttons */
+    .get-involved .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        min-width: 140px;
+        margin-bottom: 1rem;
+    }
+
+    .involvement-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .involvement-card .involvement-icon {
+        font-size: 2.5rem;
+    }
+
+    .involvement-card h3 {
+        font-size: 1.3rem;
     }
 }
 
