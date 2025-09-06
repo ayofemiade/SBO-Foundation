@@ -309,26 +309,7 @@ document.querySelectorAll('input[type="tel"]').forEach(input => {
     });
 });
 
-// Dynamic Event Status Updates
-const updateEventStatus = () => {
-    const eventCards = document.querySelectorAll('.event-card');
-    const now = new Date();
-    
-    eventCards.forEach(card => {
-        const dateElement = card.querySelector('.event-date-badge');
-        if (dateElement) {
-            const eventDate = new Date(dateElement.textContent);
-            const statusElement = card.querySelector('.event-status');
-            
-            if (eventDate < now) {
-                if (statusElement) {
-                    statusElement.textContent = 'Past Event';
-                    statusElement.className = 'event-status status-past';
-                }
-            }
-        }
-    });
-};
+
 
 // Update event status on page load
 document.addEventListener('DOMContentLoaded', updateEventStatus);
