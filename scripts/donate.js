@@ -156,6 +156,41 @@ function getCurrencySymbol(currency) {
     return symbols[currency] || currency;
 }
 
+// Function to update quick select buttons based on currency
+function updateQuickSelectButtons(currency) {
+    const quickSelectButtons = document.querySelectorAll('.quick-select-btn');
+    const currencyAmounts = {
+        'USD': [25, 50, 100, 250],
+        'EUR': [20, 45, 90, 225],
+        'GBP': [20, 40, 80, 200],
+        'NGN': [5000, 10000, 25000, 50000]
+    };
+    
+    const amounts = currencyAmounts[currency] || currencyAmounts['USD'];
+    const symbol = getCurrencySymbol(currency);
+    
+    quickSelectButtons.forEach((button, index) => {
+        if (amounts[index]) {
+            button.textContent = `${symbol}${amounts[index].toLocaleString()}`;
+            button.setAttribute('onclick', `setQuickAmount(${amounts[index]})`);
+        }
+    });
+}
+
+// Initialize currency change listener when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const currencySelector = document.getElementById('currency-selector');
+    if (currencySelector) {
+        // Set initial quick select buttons
+        updateQuickSelectButtons(currencySelector.value);
+        
+        // Add event listener for currency changes
+        currencySelector.addEventListener('change', function() {
+            updateQuickSelectButtons(this.value);
+        });
+    }
+});
+
 // Show payment form
 function showPaymentForm(amount) {
     // Create or show payment form
