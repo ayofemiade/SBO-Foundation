@@ -336,6 +336,7 @@ body {
     font-family: 'Courier New', monospace;
     font-weight: bold;
     color: #2C2C2C;
+    white-space: nowrap;
 }
 
 .featured .account-value {
@@ -657,6 +658,15 @@ body {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .account-row {
+        flex-wrap: nowrap;
+    }
+
+    .account-value {
+        text-align: right;
+        flex-shrink: 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -678,6 +688,17 @@ body {
 
     .stats-grid {
         grid-template-columns: 1fr;
+    }
+
+    .account-row {
+        flex-wrap: nowrap;
+        font-size: 0.85rem;
+    }
+
+    .account-value {
+        text-align: right;
+        flex-shrink: 0;
+        font-size: 0.8rem;
     }
 
     .footer-content {

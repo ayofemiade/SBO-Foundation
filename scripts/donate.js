@@ -83,7 +83,7 @@ function copyAccountDetails(element) {
         element.classList.add('copied');
         
         setTimeout(() => {
-            element.textContent = 'Copy Details';
+            element.textContent = 'Copy Account Details';
             element.classList.remove('copied');
         }, 2000);
     }).catch(err => {
@@ -100,7 +100,7 @@ function copyAccountDetails(element) {
         element.classList.add('copied');
         
         setTimeout(() => {
-            element.textContent = 'Copy Details';
+            element.textContent = 'Copy Account Details';
             element.classList.remove('copied');
         }, 2000);
     });
