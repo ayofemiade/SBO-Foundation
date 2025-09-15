@@ -365,31 +365,108 @@ body {
     transform: scale(0.95);
 }
 
-/* Quick Amount Buttons */
-.quick-amounts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
+/* Custom Donation Form */
+.custom-donation-form {
+    margin: 1rem 0;
 }
 
-.amount-btn {
-    background: white;
-    border: 2px solid #B8860B;
-    color: #B8860B;
-    padding: 1rem;
-    border-radius: 10px;
-    font-size: 1.1rem;
+.amount-input-group {
+    margin-bottom: 1rem;
+}
+
+.amount-input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
     font-weight: 600;
+    color: #2D7D32;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.amount-input {
+    flex: 2;
+    padding: 0.75rem;
+    border: 2px solid #B8860B;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: #F4E4BC;
+    color: #2D7D32;
+    font-weight: bold;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.amount-input:focus {
+    outline: none;
+    border-color: #2D7D32;
+    box-shadow: 0 0 5px rgba(45, 125, 50, 0.3);
+}
+
+.currency-select {
+    flex: 0 0 auto;
+    padding: 0.75rem;
+    border: 2px solid #B8860B;
+    border-radius: 5px;
+    background: #F4E4BC;
+    color: #2D7D32;
+    font-weight: bold;
     cursor: pointer;
+    width: 100px;
+    box-sizing: border-box;
+}
+
+.currency-select:focus {
+    outline: none;
+    border-color: #2D7D32;
+}
+
+.suggested-amounts {
+    margin-top: 1rem;
+}
+
+.suggestion-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.quick-select-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.quick-select-btn {
+    background: #F4E4BC;
+    color: #2D7D32;
+    border: 1px solid #B8860B;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
     transition: all 0.3s ease;
 }
 
-.amount-btn:hover,
-.amount-btn.active {
+.quick-select-btn:hover {
     background: #B8860B;
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+}
+
+.stripe-payment-btn {
+    background: #635BFF;
+    margin-top: 1.5rem;
+}
+
+.stripe-payment-btn:hover {
+    background: #5A52E8;
 }
 
 /* Statistics Section */
@@ -649,6 +726,30 @@ body {
 
     .donation-methods {
         grid-template-columns: 1fr;
+    }
+
+    .donation-card {
+        padding: 1.5rem;
+    }
+
+    .input-wrapper {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .currency-select {
+        min-width: auto;
+    }
+
+    .suggested-amounts {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .quick-select-btn {
+        padding: 0.6rem;
+        font-size: 0.9rem;
     }
 
     .quick-amounts {

@@ -106,21 +106,54 @@ function copyAccountDetails(element) {
     });
 }
 
-// Quick amount selection
-function selectAmount(button, amount) {
-    // Remove active class from all buttons
-    document.querySelectorAll('.amount-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
+// New function for quick amount selection
+function setQuickAmount(amount) {
+    const amountInput = document.getElementById('donation-amount');
+    const currencySelect = document.getElementById('currency-selector');
     
-    // Add active class to clicked button
-    button.classList.add('active');
+    if (amountInput) {
+        amountInput.value = amount;
+        // Set currency to USD for quick amounts
+        currencySelect.value = 'USD';
+    }
+}
+
+// Function to process Stripe payment
+function processStripePayment() {
+    const amountInput = document.getElementById('donation-amount');
+    const currencySelect = document.getElementById('currency-selector');
     
-    // Store selected amount (you can use this for payment processing)
-    window.selectedAmount = amount;
+    if (!amountInput || !currencySelect) {
+        alert('Payment form not found. Please refresh the page and try again.');
+        return;
+    }
     
-    // Show payment form or next step
-    showPaymentForm(amount);
+    const amount = parseFloat(amountInput.value);
+    const currency = currencySelect.value;
+    
+    if (!amount || amount <= 0) {
+        alert('Please enter a valid donation amount.');
+        amountInput.focus();
+        return;
+    }
+    
+    // Here you would integrate with Stripe
+    // For now, show a placeholder message
+    alert(`Ready to process ${getCurrencySymbol(currency)}${amount.toFixed(2)} ${currency} donation via Stripe.\n\nStripe integration link will be added here.`);
+    
+    // You can replace this with actual Stripe integration:
+    // window.location.href = 'your-stripe-payment-link';
+}
+
+// Helper function to get currency symbol
+function getCurrencySymbol(currency) {
+    const symbols = {
+        'NGN': '₦',
+        'USD': '$',
+        'EUR': '€',
+        'GBP': '£'
+    };
+    return symbols[currency] || currency;
 }
 
 // Show payment form

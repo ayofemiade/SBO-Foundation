@@ -97,17 +97,35 @@
 
                     <div class="donation-card">
                         <div class="donation-icon">💳</div>
-                        <h3>Online Payment</h3>
-                        <p>Quick and secure online donations through our payment gateway.</p>
+                        <h3>Online Payment with Stripe</h3>
+                        <p>Secure online donations with custom amounts and multiple currencies.</p>
                         
-                        <div class="quick-amounts">
-                            <button class="amount-btn" onclick="selectAmount(this, 5000)">₦5,000</button>
-                            <button class="amount-btn" onclick="selectAmount(this, 10000)">₦10,000</button>
-                            <button class="amount-btn" onclick="selectAmount(this, 25000)">₦25,000</button>
-                            <button class="amount-btn" onclick="selectAmount(this, 50000)">₦50,000</button>
+                        <div class="custom-donation-form">
+                            <div class="amount-input-group">
+                                <label for="donation-amount">Donation Amount:</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="donation-amount" class="amount-input" placeholder="Enter amount" min="1" step="0.01">
+                                    <select id="currency-selector" class="currency-select">
+                        <option value="NGN">₦ NGN</option>
+                        <option value="USD" selected>$ USD</option>
+                        <option value="EUR">€ EUR</option>
+                        <option value="GBP">£ GBP</option>
+                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="suggested-amounts">
+                        <span class="suggestion-label">Quick select:</span>
+                        <div class="quick-select-buttons">
+                             <button type="button" class="quick-select-btn" onclick="setQuickAmount(25)">$25</button>
+                             <button type="button" class="quick-select-btn" onclick="setQuickAmount(50)">$50</button>
+                             <button type="button" class="quick-select-btn" onclick="setQuickAmount(100)">$100</button>
+                             <button type="button" class="quick-select-btn" onclick="setQuickAmount(250)">$250</button>
+                         </div>
+                    </div>
                         </div>
                         
-                        <button class="copy-btn" onclick="showPaymentForm()">Proceed to Payment</button>
+                        <button class="copy-btn stripe-payment-btn" onclick="processStripePayment()">Donate with Stripe</button>
                     </div>
                 </div>
             </div>
