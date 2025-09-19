@@ -57,34 +57,72 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Contact Form Handling
+// Contact Form Handling with Formspree (fixed)
 const contactForm = document.getElementById('contactForm');
 const successMessage = document.getElementById('successMessage');
+const errorMessage = document.getElementById('errorMessage');
 
-contactForm.addEventListener('submit', function(e) {
+contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
 
-    // Simulate form submission (replace with actual form handling)
-    console.log('Form submitted:', data);
-    
-    // Show success message
-    successMessage.classList.add('show');
-    
-    // Reset form
-    contactForm.reset();
-    
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-        successMessage.classList.remove('show');
-    }, 5000);
+    // Hide any previous messages (use classes, not inline styles)
+    successMessage.classList.remove('show');
+    errorMessage.classList.remove('show');
+
+    const formData = new FormData(contactForm);
+
+    // Show loading state
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
+    submitButton.classList.add('loading');
+
+    try {
+        const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            // Show success message via class (your CSS handles display)
+            successMessage.classList.add('show');
+
+            // Reset form
+            contactForm.reset();
+
+            // Reset input styles
+            const inputs = contactForm.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.style.borderColor = 'rgba(184, 134, 11, 0.2)';
+                input.style.backgroundColor = '#F8F8F8';
+            });
+
+            // Scroll to success message (after it's visible)
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        } else {
+            // Show error message
+            errorMessage.textContent = 'There was a problem sending your message. Please try again.';
+            errorMessage.classList.add('show');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        errorMessage.textContent = 'Network error. Please try again later.';
+        errorMessage.classList.add('show');
+    } finally {
+        // Reset button state
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+        submitButton.classList.remove('loading');
+    }
 });
+
 
 // Newsletter Form Handling
 const newsletterForm = document.querySelector('.newsletter-form');
@@ -206,102 +244,7 @@ function hideValidationMessage(element) {
     }
 }
 
-// Enhanced form submission with validation
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Clear previous validation messages
-    document.querySelectorAll('.validation-error').forEach(error => error.remove());
-    
-    let isValid = true;
-    const formData = new FormData(contactForm);
-    const data = {};
-    
-    // Validate required fields
-    const requiredFields = ['firstName', 'lastName', 'email', 'subject', 'message'];
-    
-    requiredFields.forEach(fieldName => {
-        const field = document.getElementById(fieldName);
-        const value = formData.get(fieldName);
-        
-        if (!value || !value.trim()) {
-            field.style.borderColor = '#e74c3c';
-            field.style.backgroundColor = '#fdf2f2';
-            showValidationMessage(field, `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/([A-Z])/g, ' $1')} is required`);
-            isValid = false;
-        } else {
-            data[fieldName] = value;
-        }
-    });
-    
-    // Validate email format
-    const emailValue = formData.get('email');
-    if (emailValue && !emailPattern.test(emailValue)) {
-        const emailField = document.getElementById('email');
-        emailField.style.borderColor = '#e74c3c';
-        emailField.style.backgroundColor = '#fdf2f2';
-        showValidationMessage(emailField, 'Please enter a valid email address');
-        isValid = false;
-    }
-    
-    // Validate phone if provided
-    const phoneValue = formData.get('phone');
-    if (phoneValue && !phonePattern.test(phoneValue.replace(/\s/g, ''))) {
-        const phoneField = document.getElementById('phone');
-        phoneField.style.borderColor = '#e74c3c';
-        phoneField.style.backgroundColor = '#fdf2f2';
-        showValidationMessage(phoneField, 'Please enter a valid phone number');
-        isValid = false;
-    }
-    
-    if (!isValid) {
-        // Scroll to first error
-        const firstError = document.querySelector('.validation-error');
-        if (firstError) {
-            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        return;
-    }
-    
-    // If validation passes, submit the form
-    data.phone = phoneValue; // Add phone even if not required
-    
-    // Simulate form submission (replace with actual form handling)
-    console.log('Form submitted:', data);
-    
-    // Show loading state
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-    const originalText = submitButton.textContent;
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
-    
-    // Simulate API call delay
-    setTimeout(() => {
-        // Show success message
-        successMessage.classList.add('show');
-        
-        // Reset form
-        contactForm.reset();
-        
-        // Reset button
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-        
-        // Reset input styles
-        inputs.forEach(input => {
-            input.style.borderColor = 'rgba(184, 134, 11, 0.2)';
-            input.style.backgroundColor = '#F8F8F8';
-        });
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-            successMessage.classList.remove('show');
-        }, 5000);
-        
-        // Scroll to success message
-        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 2000);
-});
+
 
 // Character counter for message textarea
 const messageTextarea = document.getElementById('message');
