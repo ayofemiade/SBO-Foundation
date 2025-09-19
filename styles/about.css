@@ -408,7 +408,10 @@ body {
     background: linear-gradient(135deg, #2D7D32 0%, #4CAF50 100%);
     display: flex;
     align-items: center;
+    justify-content: center;
     overflow: hidden;
+    font-size: 4rem;
+    color: white;
 }
 
 .trustee-image {
@@ -559,6 +562,17 @@ body {
     background: #4CAF50;
 }
 
+.social-link.disabled {
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.social-link.disabled:hover {
+    color: #999;
+    transform: none;
+}
+
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
@@ -697,6 +711,14 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+    .trustee-photo {
+        width: 150px;
+        height: 150px;
+        font-size: 3.5rem;
+    }
+}
+
 @media (max-width: 480px) {
     .container {
         padding: 0 15px;
@@ -719,8 +741,12 @@ body {
     }
 
     .trustee-photo {
-        width: 100px;
-        height: 100px;
-        font-size: 2.5rem;
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+    }
+
+    .trustee-image {
+        border: 2px solid #B8860B;
     }
 }

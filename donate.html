@@ -97,17 +97,17 @@
                         <button class="copy-btn" onclick="copyAccountDetails(this)">Copy Account Details</button>
                     </div>
 
-                    <div class="donation-card">
+                    <div class="donation-card disabled-card">
                         <div class="donation-icon">💳</div>
                         <h3>Online Payment with Stripe</h3>
                         <p>Secure online donations with custom amounts and multiple currencies.</p>
                         
-                        <div class="custom-donation-form">
+                        <div class="custom-donation-form disabled-form">
                             <div class="amount-input-group">
                                 <label for="donation-amount">Donation Amount:</label>
                                 <div class="input-wrapper">
-                                    <input type="number" id="donation-amount" class="amount-input" placeholder="Enter amount" min="1" step="0.01">
-                                    <select id="currency-selector" class="currency-select">
+                                    <input type="number" id="donation-amount" class="amount-input" placeholder="Enter amount" min="1" step="0.01" disabled>
+                                    <select id="currency-selector" class="currency-select" disabled>
                         <option value="NGN">₦ NGN</option>
                         <option value="USD" selected>$ USD</option>
                         <option value="EUR">€ EUR</option>
@@ -119,15 +119,20 @@
                             <div class="suggested-amounts">
                         <span class="suggestion-label">Quick select:</span>
                         <div class="quick-select-buttons">
-                             <button type="button" class="quick-select-btn" onclick="setQuickAmount(25)">$25</button>
-                             <button type="button" class="quick-select-btn" onclick="setQuickAmount(50)">$50</button>
-                             <button type="button" class="quick-select-btn" onclick="setQuickAmount(100)">$100</button>
-                             <button type="button" class="quick-select-btn" onclick="setQuickAmount(250)">$250</button>
+                             <button type="button" class="quick-select-btn" disabled>$25</button>
+                             <button type="button" class="quick-select-btn" disabled>$50</button>
+                             <button type="button" class="quick-select-btn" disabled>$100</button>
+                             <button type="button" class="quick-select-btn" disabled>$250</button>
                          </div>
                     </div>
                         </div>
                         
-                        <button class="copy-btn stripe-payment-btn" onclick="processStripePayment()">Donate with Stripe</button>
+                        <div class="coming-soon-notice">
+                            <span class="coming-soon-text">🚀 Coming Soon!</span>
+                            <p>Online payment integration is currently under development. Please use bank transfer for now.</p>
+                        </div>
+                        
+                        <button class="copy-btn stripe-payment-btn disabled-btn" disabled>Stripe Payment (Coming Soon)</button>
                     </div>
                 </div>
             </div>
@@ -219,9 +224,9 @@
                 <div class="footer-section">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        <a href="#" class="social-link">Facebook</a>
-                        <a href="#" class="social-link">Twitter</a>
-                        <a href="#" class="social-link">LinkedIn</a>
+                        <span class="social-link disabled">Facebook (Coming Soon)</span>
+                        <span class="social-link disabled">Twitter (Coming Soon)</span>
+                        <span class="social-link disabled">LinkedIn (Coming Soon)</span>
                     </div>
                 </div>
             </div>

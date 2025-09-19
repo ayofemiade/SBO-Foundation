@@ -469,6 +469,57 @@ body {
     background: #5A52E8;
 }
 
+/* Disabled Stripe Payment Styles */
+.disabled-card {
+    opacity: 0.7;
+    position: relative;
+}
+
+.disabled-form {
+    pointer-events: none;
+}
+
+.disabled-form input,
+.disabled-form select,
+.disabled-form button {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.coming-soon-notice {
+    background: linear-gradient(135deg, #FFF3CD 0%, #FCF4A3 100%);
+    border: 2px solid #F0AD4E;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.coming-soon-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #8A6D3B;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.coming-soon-notice p {
+    margin: 0;
+    color: #8A6D3B;
+    font-size: 0.9rem;
+}
+
+.disabled-btn {
+    background: #6C757D !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
+.disabled-btn:hover {
+    background: #6C757D !important;
+    transform: none !important;
+}
+
 /* Statistics Section */
 /* Chronicles Section */
 .chronicles {
@@ -625,6 +676,17 @@ body {
 
 .social-link:hover {
     background: #4CAF50;
+}
+
+.social-link.disabled {
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.social-link.disabled:hover {
+    color: #999;
+    transform: none;
 }
 
 .footer-bottom {
